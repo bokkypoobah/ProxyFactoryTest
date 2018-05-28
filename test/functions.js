@@ -54,39 +54,57 @@ function addAccount(account, accountName) {
 }
 
 
-// -----------------------------------------------------------------------------
-// Token Contract
-// -----------------------------------------------------------------------------
-var tokenContractAddress = null;
-var tokenContractAbi = null;
+//-----------------------------------------------------------------------------
+//Token A Contract
+//-----------------------------------------------------------------------------
+var tokenAContractAddress = null;
+var tokenAContractAbi = null;
 
-function addTokenContractAddressAndAbi(address, tokenAbi) {
-  tokenContractAddress = address;
-  tokenContractAbi = tokenAbi;
+function addTokenAContractAddressAndAbi(address, tokenAbi) {
+  tokenAContractAddress = address;
+  tokenAContractAbi = tokenAbi;
 }
 
 
-// -----------------------------------------------------------------------------
-// Account ETH and token balances
-// -----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//Token B Contract
+//-----------------------------------------------------------------------------
+var tokenBContractAddress = null;
+var tokenBContractAbi = null;
+
+function addTokenBContractAddressAndAbi(address, tokenAbi) {
+  tokenBContractAddress = address;
+  tokenBContractAbi = tokenAbi;
+}
+
+
+//-----------------------------------------------------------------------------
+//Account ETH and token balances
+//-----------------------------------------------------------------------------
 function printBalances() {
-  var token = tokenContractAddress == null || tokenContractAbi == null ? null : web3.eth.contract(tokenContractAbi).at(tokenContractAddress);
-  var decimals = token == null ? 18 : token.decimals();
+  var tokenA = tokenAContractAddress == null || tokenAContractAbi == null ? null : web3.eth.contract(tokenAContractAbi).at(tokenAContractAddress);
+  var tokenB = tokenBContractAddress == null || tokenBContractAbi == null ? null : web3.eth.contract(tokenBContractAbi).at(tokenBContractAddress);
+  var decimalsA = tokenA == null ? 18 : tokenA.decimals();
+  var decimalsB = tokenB == null ? 18 : tokenB.decimals();
   var i = 0;
-  var totalTokenBalance = new BigNumber(0);
-  console.log("RESULT:  # Account                                             EtherBalanceChange                          Token Name");
-  console.log("RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------");
+  var totalTokenABalance = new BigNumber(0);
+  var totalTokenBBalance = new BigNumber(0);
+  console.log("RESULT:  # Account                                             EtherBalanceChange                 (Token A) WETH                  (Token B) DAI Name");
+  console.log("RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------");
   accounts.forEach(function(e) {
     var etherBalanceBaseBlock = eth.getBalance(e, baseBlock);
     var etherBalance = web3.fromWei(eth.getBalance(e).minus(etherBalanceBaseBlock), "ether");
-    var tokenBalance = token == null ? new BigNumber(0) : token.balanceOf(e).shift(-decimals);
-    totalTokenBalance = totalTokenBalance.add(tokenBalance);
-    console.log("RESULT: " + pad2(i) + " " + e  + " " + pad(etherBalance) + " " + padToken(tokenBalance, decimals) + " " + accountNames[e]);
+    var tokenABalance = tokenA == null ? new BigNumber(0) : tokenA.balanceOf(e).shift(-decimalsA);
+    var tokenBBalance = tokenB == null ? new BigNumber(0) : tokenB.balanceOf(e).shift(-decimalsB);
+    totalTokenABalance = totalTokenABalance.add(tokenABalance);
+    totalTokenBBalance = totalTokenBBalance.add(tokenBBalance);
+    console.log("RESULT: " + pad2(i) + " " + e  + " " + pad(etherBalance) + " " +
+      padToken(tokenABalance, decimalsA) + " " + padToken(tokenBBalance, decimalsB) + " " + accountNames[e]);
     i++;
   });
-  console.log("RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------");
-  console.log("RESULT:                                                                           " + padToken(totalTokenBalance, decimals) + " Total Token Balances");
-  console.log("RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------");
+  console.log("RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------");
+  console.log("RESULT:                                                                           " + padToken(totalTokenABalance, decimalsA) + " " + padToken(totalTokenBBalance, decimalsB) + " Total Token Balances");
+  console.log("RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------");
   console.log("RESULT: ");
 }
 
@@ -267,11 +285,11 @@ function waitUntilBlock(message, block, addBlocks) {
 //-----------------------------------------------------------------------------
 // Token Contract
 //-----------------------------------------------------------------------------
-var tokenFromBlock = 0;
-function printTokenContractDetails() {
-  console.log("RESULT: tokenContractAddress=" + tokenContractAddress);
-  if (tokenContractAddress != null && tokenContractAbi != null) {
-    var contract = eth.contract(tokenContractAbi).at(tokenContractAddress);
+var tokenAFromBlock = 0;
+function printTokenAContractDetails() {
+  console.log("RESULT: tokenAContractAddress=" + tokenAContractAddress);
+  if (tokenAContractAddress != null && tokenAContractAbi != null) {
+    var contract = eth.contract(tokenAContractAbi).at(tokenAContractAddress);
     var decimals = contract.decimals();
     console.log("RESULT: token.owner=" + contract.owner());
     console.log("RESULT: token.newOwner=" + contract.newOwner());
@@ -279,14 +297,12 @@ function printTokenContractDetails() {
     console.log("RESULT: token.name=" + contract.name());
     console.log("RESULT: token.decimals=" + decimals);
     console.log("RESULT: token.totalSupply=" + contract.totalSupply().shift(-decimals));
-    // console.log("RESULT: token.transferable=" + contract.transferable());
-    // console.log("RESULT: token.mintable=" + contract.mintable());
-    // console.log("RESULT: token.minter=" + contract.minter());
+    console.log("RESULT: token.initialised=" + contract.initialised());
 
     var latestBlock = eth.blockNumber;
     var i;
 
-    var approvalEvents = contract.Approval({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
+    var approvalEvents = contract.Approval({}, { fromBlock: tokenAFromBlock, toBlock: latestBlock });
     i = 0;
     approvalEvents.watch(function (error, result) {
       console.log("RESULT: Approval " + i++ + " #" + result.blockNumber + " owner=" + result.args.owner +
@@ -294,7 +310,7 @@ function printTokenContractDetails() {
     });
     approvalEvents.stopWatching();
 
-    var transferEvents = contract.Transfer({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
+    var transferEvents = contract.Transfer({}, { fromBlock: tokenAFromBlock, toBlock: latestBlock });
     i = 0;
     transferEvents.watch(function (error, result) {
       console.log("RESULT: Transfer " + i++ + " #" + result.blockNumber + ": from=" + result.args.from + " to=" + result.args.to +
@@ -302,7 +318,48 @@ function printTokenContractDetails() {
     });
     transferEvents.stopWatching();
 
-    tokenFromBlock = latestBlock + 1;
+    tokenAFromBlock = latestBlock + 1;
+  }
+}
+
+
+//-----------------------------------------------------------------------------
+// Token Contract
+//-----------------------------------------------------------------------------
+var tokenBFromBlock = 0;
+function printTokenBContractDetails() {
+  console.log("RESULT: tokenBContractAddress=" + tokenBContractAddress);
+  if (tokenBContractAddress != null && tokenBContractAbi != null) {
+    var contract = eth.contract(tokenBContractAbi).at(tokenBContractAddress);
+    var decimals = contract.decimals();
+    console.log("RESULT: token.owner=" + contract.owner());
+    console.log("RESULT: token.newOwner=" + contract.newOwner());
+    console.log("RESULT: token.symbol=" + contract.symbol());
+    console.log("RESULT: token.name=" + contract.name());
+    console.log("RESULT: token.decimals=" + decimals);
+    console.log("RESULT: token.totalSupply=" + contract.totalSupply().shift(-decimals));
+    console.log("RESULT: token.initialised=" + contract.initialised());
+
+    var latestBlock = eth.blockNumber;
+    var i;
+
+    var approvalEvents = contract.Approval({}, { fromBlock: tokenBFromBlock, toBlock: latestBlock });
+    i = 0;
+    approvalEvents.watch(function (error, result) {
+      console.log("RESULT: Approval " + i++ + " #" + result.blockNumber + " owner=" + result.args.owner +
+        " spender=" + result.args.spender + " tokens=" + result.args.tokens.shift(-decimals));
+    });
+    approvalEvents.stopWatching();
+
+    var transferEvents = contract.Transfer({}, { fromBlock: tokenBFromBlock, toBlock: latestBlock });
+    i = 0;
+    transferEvents.watch(function (error, result) {
+      console.log("RESULT: Transfer " + i++ + " #" + result.blockNumber + ": from=" + result.args.from + " to=" + result.args.to +
+        " tokens=" + result.args.tokens.shift(-decimals));
+    });
+    transferEvents.stopWatching();
+
+    tokenBFromBlock = latestBlock + 1;
   }
 }
 
@@ -444,65 +501,62 @@ function printClubContractDetails() {
 
 
 // -----------------------------------------------------------------------------
-// ClubFactory Contract
+// ProxyFactory Contract
 // -----------------------------------------------------------------------------
-var clubFactoryContractAddress = null;
-var clubFactoryContractAbi = null;
+var proxyFactoryContractAddress = null;
+var proxyFactoryContractAbi = null;
 
-function addClubFactoryContractAddressAndAbi(address, clubFactoryAbi) {
-  clubFactoryContractAddress = address;
-  clubFactoryContractAbi = clubFactoryAbi;
+function addProxyFactoryContractAddressAndAbi(address, proxyFactoryAbi) {
+  proxyFactoryContractAddress = address;
+  proxyFactoryContractAbi = proxyFactoryAbi;
 }
 
-var clubFactoryFromBlock = 0;
+var proxyFactoryFromBlock = 0;
 
-function getClubAndTokenListing() {
-  var clubs = [];
-  var tokens = [];
-  console.log("RESULT: clubFactoryContractAddress=" + clubFactoryContractAddress);
-  if (clubFactoryContractAddress != null && clubFactoryContractAbi != null) {
-    var contract = eth.contract(clubFactoryContractAbi).at(clubFactoryContractAddress);
+function getProxyFactoryListing() {
+  var newContractAddress;
+  console.log("RESULT: proxyFactoryContractAddress=" + proxyFactoryContractAddress);
+  if (proxyFactoryContractAddress != null && proxyFactoryContractAbi != null) {
+    var contract = eth.contract(proxyFactoryContractAbi).at(proxyFactoryContractAddress);
 
     var latestBlock = eth.blockNumber;
     var i;
 
-    var clubListingEvents = contract.ClubEthListing({}, { fromBlock: clubFactoryFromBlock, toBlock: latestBlock });
+    var proxyDeployedEvents = contract.ProxyDeployed({}, { fromBlock: proxyFactoryFromBlock, toBlock: latestBlock });
     i = 0;
-    clubListingEvents.watch(function (error, result) {
-      console.log("RESULT: get ClubEthListing " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
-      clubs.push(result.args.clubAddress);
-      tokens.push(result.args.tokenAddress);
+    proxyDeployedEvents.watch(function (error, result) {
+      console.log("RESULT: get ProxyDeployed " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
+      newContractAddress = result.args.proxyAddress;
     });
-    clubListingEvents.stopWatching();
+    proxyDeployedEvents.stopWatching();
   }
-  return [clubs, tokens];
+  // console.log("RESULT: got ProxyDeployed=" + newContractAddress);
+  return newContractAddress;
 }
 
-function printClubFactoryContractDetails() {
-  console.log("RESULT: clubFactoryContractAddress=" + clubFactoryContractAddress);
-  if (clubFactoryContractAddress != null && clubFactoryContractAbi != null) {
-    var contract = eth.contract(clubFactoryContractAbi).at(clubFactoryContractAddress);
-    console.log("RESULT: clubFactory.owner=" + contract.owner());
-    console.log("RESULT: clubFactory.newOwner=" + contract.newOwner());
+function printProxyFactoryContractDetails() {
+  console.log("RESULT: proxyFactoryContractAddress=" + proxyFactoryContractAddress);
+  if (proxyFactoryContractAddress != null && proxyFactoryContractAbi != null) {
+    var contract = eth.contract(proxyFactoryContractAbi).at(proxyFactoryContractAddress);
 
     var latestBlock = eth.blockNumber;
     var i;
 
-    var ownershipTransferredEvents = contract.OwnershipTransferred({}, { fromBlock: clubFactoryFromBlock, toBlock: latestBlock });
+    var proxyDeployedEvents = contract.ProxyDeployed({}, { fromBlock: proxyFactoryFromBlock, toBlock: latestBlock });
     i = 0;
-    ownershipTransferredEvents.watch(function (error, result) {
-      console.log("RESULT: OwnershipTransferred " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
+    proxyDeployedEvents.watch(function (error, result) {
+      console.log("RESULT: ProxyDeployed " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
     });
-    ownershipTransferredEvents.stopWatching();
+    proxyDeployedEvents.stopWatching();
 
-    var clubEthListingEvents = contract.ClubEthListing({}, { fromBlock: clubFactoryFromBlock, toBlock: latestBlock });
+    var proxiesDeployedEvents = contract.ProxiesDeployed({}, { fromBlock: proxyFactoryFromBlock, toBlock: latestBlock });
     i = 0;
-    clubEthListingEvents.watch(function (error, result) {
-      console.log("RESULT: ClubEthListing " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
+    proxiesDeployedEvents.watch(function (error, result) {
+      console.log("RESULT: ProxiesDeployed " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
     });
-    clubEthListingEvents.stopWatching();
+    proxiesDeployedEvents.stopWatching();
 
-    clubFactoryFromBlock = latestBlock + 1;
+    proxyFactoryFromBlock = latestBlock + 1;
   }
 }
 

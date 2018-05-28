@@ -108,6 +108,7 @@ var proxyFactory = proxyFactoryContract.new({from: contractOwnerAccount, data: p
       } else {
         proxyFactoryAddress = contract.address;
         addAccount(proxyFactoryAddress, "ProxyFactory");
+        addProxyFactoryContractAddressAndAbi(proxyFactoryAddress, proxyFactoryAbi);
         console.log("DATA: proxyFactoryAddress=" + proxyFactoryAddress);
       }
     }
@@ -118,12 +119,13 @@ while (txpool.status.pending > 0) {
 printBalances();
 failIfTxStatusError(proxyFactoryTx, deployProxyFactoryMessage);
 printTxData("proxyFactoryTx", proxyFactoryTx);
+printProxyFactoryContractDetails();
 console.log("RESULT: ");
 
 
 // -----------------------------------------------------------------------------
 var deployTokenMessage = "Deploy Token Contract";
-var symbol = "ORGINAL";
+var symbol = "ORIGINAL";
 var name = "Original";
 var decimals = 18;
 var initialSupply = new BigNumber("1000000").shift(18);
@@ -133,457 +135,92 @@ var tokenContract = web3.eth.contract(tokenAbi);
 // console.log(JSON.stringify(tokenContract));
 var tokenTx = null;
 var tokenAddress = null;
-var token = tokenContract.new(symbol, name, decimals, contractOwnerAccount, initialSupply, {from: contractOwnerAccount, data: tokenBin, gas: 6000000, gasPrice: defaultGasPrice},
+var token = tokenContract.new({from: contractOwnerAccount, data: tokenBin, gas: 6000000, gasPrice: defaultGasPrice},
   function(e, contract) {
     if (!e) {
       if (!contract.address) {
         tokenTx = contract.transactionHash;
       } else {
         tokenAddress = contract.address;
-        addAccount(tokenAddress, "Token '" + token.symbol() + "' '" + token.name() + "'");
-        addTokenContractAddressAndAbi(tokenAddress, tokenAbi);
-        console.log("DATA: var tokenAddress=\"" + tokenAddress + "\";");
-        console.log("DATA: var tokenAbi=" + JSON.stringify(tokenAbi) + ";");
-        console.log("DATA: var token=eth.contract(tokenAbi).at(tokenAddress);");
       }
     }
   }
 );
 while (txpool.status.pending > 0) {
 }
+var deployToken_1Tx = token.init(symbol, name, decimals, contractOwnerAccount, initialSupply, {from: contractOwnerAccount, data: tokenBin, gas: 6000000, gasPrice: defaultGasPrice});
+while (txpool.status.pending > 0) {
+}
+addAccount(tokenAddress, "Token '" + token.symbol() + "' '" + token.name() + "'");
+addTokenAContractAddressAndAbi(tokenAddress, tokenAbi);
+console.log("DATA: var tokenAddress=\"" + tokenAddress + "\";");
+console.log("DATA: var tokenAbi=" + JSON.stringify(tokenAbi) + ";");
+console.log("DATA: var token=eth.contract(tokenAbi).at(tokenAddress);");
 printBalances();
-failIfTxStatusError(tokenTx, deployTokenMessage);
+failIfTxStatusError(tokenTx, deployTokenMessage + " - deploy");
+failIfTxStatusError(deployToken_1Tx, deployTokenMessage + " - init");
 printTxData("tokenTx", tokenTx);
-printTokenContractDetails();
+printTxData("deployToken_1Tx", deployToken_1Tx);
+printTokenAContractDetails();
 console.log("RESULT: ");
 
 
 // -----------------------------------------------------------------------------
 var deployProxyContractMessage = "Deploy Proxy Contract";
-var originalData = "00000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000012000000000000000000000000a11aae29840fbb5c86e6fd4cf809eba183aef43300000000000000000000000000000000000000000000d3c21bcecceda100000000000000000000000000000000000000000000000000000000000000000000074f5247494e414c0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000084f726967696e616c000000000000000000000000000000000000000000000000";
-console.log("RESULT: originalData=" + originalData);
-var tokenContract=eth.contract(tokenAbi);
-var data=tokenContract.new.getData(symbol, name, decimals, contractOwnerAccount, initialSupply.toFixed(0)).substring(9);
-console.log("RESULT: data=" + data);
+// var originalData = "00000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000012000000000000000000000000a11aae29840fbb5c86e6fd4cf809eba183aef43300000000000000000000000000000000000000000000d3c21bcecceda100000000000000000000000000000000000000000000000000000000000000000000074f5247494e414c0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000084f726967696e616c000000000000000000000000000000000000000000000000";
+// console.log("RESULT: originalData=" + originalData);
+// var tokenContract=eth.contract(tokenAbi);
+// var data="0x" + tokenContract.new.getData(symbol, name, decimals, contractOwnerAccount, initialSupply.toFixed(0)).substring(9);
+var data="";
+// console.log("RESULT: data=" + data);
 // -----------------------------------------------------------------------------
 console.log("RESULT: ----- " + deployProxyContractMessage + " -----");
 var deployProxyContractTx = proxyFactory.createProxy(tokenAddress, data, {from: aliceAccount, gas: 4000000, gasPrice: defaultGasPrice});
 while (txpool.status.pending > 0) {
 }
-/*
-var results = getClubAndTokenListing();
-var clubs = results[0];
-var tokens = results[1];
-console.log("RESULT: clubs=#" + clubs.length + " " + JSON.stringify(clubs));
-console.log("RESULT: tokens=#" + tokens.length + " " + JSON.stringify(tokens));
-// Can check, but the rest will not work anyway - if (bttsTokens.length == 1)
-var clubAddress = clubs[0];
-var tokenAddress = tokens[0];
-var club = web3.eth.contract(clubAbi).at(clubAddress);
-console.log("DATA: clubAddress=" + clubAddress);
-var token = web3.eth.contract(tokenAbi).at(tokenAddress);
-console.log("DATA: tokenAddress=" + tokenAddress);
-addAccount(tokenAddress, "Token '" + token.symbol() + "' '" + token.name() + "'");
-addAccount(clubAddress, "Club '" + club.name() + "'");
-addClubContractAddressAndAbi(clubAddress, clubAbi);
-addTokenContractAddressAndAbi(tokenAddress, tokenAbi);
-*/
+var newContractAddress = getProxyFactoryListing();
+console.log("RESULT: newContractAddress=" + newContractAddress);
+var newToken = web3.eth.contract(tokenAbi).at(newContractAddress);
+var symbol = "NEWTOKEN";
+var name = "New Token";
+var decimals = 18;
+var initialSupply = new BigNumber("2000000").shift(18);
+var deployNewToken_1Tx = newToken.init(symbol, name, decimals, aliceAccount, initialSupply, {from: aliceAccount, data: tokenBin, gas: 6000000, gasPrice: defaultGasPrice});
+while (txpool.status.pending > 0) {
+}
+addAccount(newContractAddress, "New Token '" + newToken.symbol() + "' '" + newToken.name() + "'");
+addTokenBContractAddressAndAbi(newContractAddress, tokenAbi);
 printBalances();
-failIfTxStatusError(deployProxyContractTx, deployProxyContractMessage);
+failIfTxStatusError(deployProxyContractTx, deployProxyContractMessage + " - Deploy New Token Contract");
+failIfTxStatusError(deployNewToken_1Tx, deployProxyContractMessage + " - New Token Contract Init");
 printTxData("deployProxyContractTx", deployProxyContractTx);
-// printClubFactoryContractDetails();
-printTokenContractDetails();
-// printClubContractDetails();
+printTxData("deployNewToken_1Tx", deployNewToken_1Tx);
+printProxyFactoryContractDetails();
+printTokenAContractDetails();
+printTokenBContractDetails();
 console.log("RESULT: ");
 
-exit;
 
+console.log("RESULT: oldAddr=" + tokenAddress);
+console.log("RESULT: newAddr=" + newContractAddress);
+console.log("RESULT: oldCode=" + eth.getCode(tokenAddress));
+console.log("RESULT: newCode=" + eth.getCode(newContractAddress));
 
-// -----------------------------------------------------------------------------
-var deployClubFactoryMessage = "Deploy ClubFactory";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + deployClubFactoryMessage + " -----");
-console.log("RESULT: clubFactoryBin='" + clubFactoryBin + "'");
-var newClubFactoryBin = clubFactoryBin.replace(/__ClubEthFactory\.sol\:Members____________/g, membersLibAddress.substring(2, 42)).replace(/__ClubEthFactory\.sol\:Proposals__________/g, proposalsLibAddress.substring(2, 42));
-console.log("RESULT: newClubFactoryBin='" + newClubFactoryBin + "'");
-var clubFactoryContract = web3.eth.contract(clubFactoryAbi);
-// console.log(JSON.stringify(clubFactoryAbi));
-// console.log(newClubFactoryBin);
-var clubFactoryTx = null;
-var clubFactoryAddress = null;
-var clubFactory = clubFactoryContract.new({from: contractOwnerAccount, data: newClubFactoryBin, gas: 6000000, gasPrice: defaultGasPrice},
-  function(e, contract) {
-    if (!e) {
-      if (!contract.address) {
-        clubFactoryTx = contract.transactionHash;
-      } else {
-        clubFactoryAddress = contract.address;
-        addAccount(clubFactoryAddress, "ClubFactory");
-        addClubFactoryContractAddressAndAbi(clubFactoryAddress, clubFactoryAbi);
-        console.log("DATA: clubFactoryAddress=" + clubFactoryAddress);
-      }
-    }
+for (var i = 0; i < 10; i++) {
+  var older = eth.getStorageAt(tokenAddress, i);
+  var newer = eth.getStorageAt(newContractAddress, i);
+  var olderText;
+  var newerText;
+  if (i == 2 || i == 3) {
+    olderText = web3.toAscii(older.replace(/00.*$/g,""));
+    newerText = web3.toAscii(newer.replace(/00.*$/g,""));
+  } else {
+    olderText = "";
+    newerText = "";
   }
-);
-while (txpool.status.pending > 0) {
+  console.log("RESULT: old data[" + i + "]=" + older + " " + new BigNumber(older.substring(2), 16) + " " + olderText);
+  console.log("RESULT: new data[" + i + "]=" + newer + " " + new BigNumber(newer.substring(2), 16) + " " + newerText);
 }
-printBalances();
-failIfTxStatusError(clubFactoryTx, deployClubFactoryMessage);
-printTxData("clubFactoryTx", clubFactoryTx);
-printClubFactoryContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var deployClubMessage = "Deploy Club Contract";
-var clubName = "Babysitters Club";
-var tokenSymbol = "SITS";
-var tokenName = "Sit Minutes";
-var tokenDecimal = 18;
-var memberName = "Alice";
-var tokensForNewMembers = new BigNumber(200 * 60).shift(18);
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + deployClubMessage + " -----");
-var clubContract = web3.eth.contract(clubAbi);
-// console.log(JSON.stringify(clubContract));
-var tokenContract = web3.eth.contract(tokenAbi);
-// console.log(JSON.stringify(tokenContract));
-var deployClubTx = clubFactory.deployClubEthContract(clubName, tokenSymbol, tokenName, tokenDecimal, memberName, tokensForNewMembers, {from: aliceAccount, gas: 4000000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-var results = getClubAndTokenListing();
-var clubs = results[0];
-var tokens = results[1];
-console.log("RESULT: clubs=#" + clubs.length + " " + JSON.stringify(clubs));
-console.log("RESULT: tokens=#" + tokens.length + " " + JSON.stringify(tokens));
-// Can check, but the rest will not work anyway - if (bttsTokens.length == 1)
-var clubAddress = clubs[0];
-var tokenAddress = tokens[0];
-var club = web3.eth.contract(clubAbi).at(clubAddress);
-console.log("DATA: clubAddress=" + clubAddress);
-var token = web3.eth.contract(tokenAbi).at(tokenAddress);
-console.log("DATA: tokenAddress=" + tokenAddress);
-addAccount(tokenAddress, "Token '" + token.symbol() + "' '" + token.name() + "'");
-addAccount(clubAddress, "Club '" + club.name() + "'");
-addClubContractAddressAndAbi(clubAddress, clubAbi);
-addTokenContractAddressAndAbi(tokenAddress, tokenAbi);
-printBalances();
-failIfTxStatusError(deployClubTx, deployClubMessage);
-printTxData("deployClubTx", deployClubTx);
-printClubFactoryContractDetails();
-printTokenContractDetails();
-printClubContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var setMemberNameMessage = "Set Member Name";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + setMemberNameMessage + " -----");
-var setMemberNameTx = club.setMemberName("Alice in Blockchains", {from: aliceAccount, gas: 4000000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-failIfTxStatusError(setMemberNameTx, setMemberNameMessage);
-printTxData("setMemberNameTx", setMemberNameTx);
-printClubContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var addMemberProposal1_Message = "Add Member Proposal #1";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + addMemberProposal1_Message + " -----");
-var addMemberProposal1_1Tx = club.proposeAddMember("Bob", bobAccount, {from: aliceAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(addMemberProposal1_1Tx, addMemberProposal1_Message + " - Alice addMemberProposal(ac3, 'Bob')");
-printTxData("addMemberProposal1_1Tx", addMemberProposal1_1Tx);
-printClubContractDetails();
-printTokenContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var addMemberProposal2_Message = "Add Member Proposal #2";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + addMemberProposal2_Message + " -----");
-var addMemberProposal2_1Tx = club.proposeAddMember("Carol", carolAccount, {from: aliceAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-var addMemberProposal2_2Tx = club.voteNo(1, {from: aliceAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-var addMemberProposal2_3Tx = club.voteYes(1, {from: aliceAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-var addMemberProposal2_4Tx = club.voteYes(1, {from: bobAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(addMemberProposal2_1Tx, addMemberProposal2_Message + " - Alice addMemberProposal(ac4, 'Carol')");
-failIfTxStatusError(addMemberProposal2_2Tx, addMemberProposal2_Message + " - Alice voteNo(1)");
-failIfTxStatusError(addMemberProposal2_3Tx, addMemberProposal2_Message + " - Alice voteYes(1)");
-failIfTxStatusError(addMemberProposal2_4Tx, addMemberProposal2_Message + " - Bob voteYes(1)");
-printTxData("addMemberProposal2_1Tx", addMemberProposal2_1Tx);
-printTxData("addMemberProposal2_2Tx", addMemberProposal2_2Tx);
-printTxData("addMemberProposal2_3Tx", addMemberProposal2_3Tx);
-printTxData("addMemberProposal2_4Tx", addMemberProposal2_4Tx);
-printClubContractDetails();
-printTokenContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var removeMemberProposal1_Message = "Remove Member Proposal #1";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + removeMemberProposal1_Message + " -----");
-var removeMemberProposal1_1Tx = club.proposeRemoveMember("Remove Bob", bobAccount, {from: carolAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-var removeMemberProposal1_2Tx = club.voteYes(2, {from: aliceAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(removeMemberProposal1_1Tx, removeMemberProposal1_Message + " - Carol removeMemberProposal(ac3, 'Bob')");
-failIfTxStatusError(removeMemberProposal1_2Tx, removeMemberProposal1_Message + " - Alice voteYes(2)");
-printTxData("removeMemberProposal1_1Tx", removeMemberProposal1_1Tx);
-printTxData("removeMemberProposal1_2Tx", removeMemberProposal1_2Tx);
-printClubContractDetails();
-printTokenContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var mintTokensProposal1_Message = "Mint Tokens";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + mintTokensProposal1_Message + " -----");
-var mintTokensProposal1_1Tx = club.proposeMintTokens("Mint tokens Alice", aliceAccount, new BigNumber("100000").shift(18), {from: aliceAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-var mintTokensProposal1_2Tx = club.voteYes(3, {from: bobAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-var mintTokensProposal1_3Tx = club.voteYes(3, {from: carolAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(mintTokensProposal1_1Tx, mintTokensProposal1_Message + " - Alice proposeMintTokens(Alice, 100000 tokens)");
-passIfTxStatusError(mintTokensProposal1_2Tx, mintTokensProposal1_Message + " - Bob voteYes(3) - Expecting failure as not a member");
-failIfTxStatusError(mintTokensProposal1_3Tx, mintTokensProposal1_Message + " - Carol voteYes(3)");
-printTxData("mintTokensProposal1_1Tx", mintTokensProposal1_1Tx);
-printTxData("mintTokensProposal1_2Tx", mintTokensProposal1_2Tx);
-printTxData("mintTokensProposal1_3Tx", mintTokensProposal1_3Tx);
-printClubContractDetails();
-printTokenContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var burnTokensProposal1_Message = "Burn Tokens";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + burnTokensProposal1_Message + " -----");
-var burnTokensProposal1_1Tx = club.proposeBurnTokens("Burn tokens Alice", aliceAccount, new BigNumber("50000").shift(18), {from: aliceAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-var burnTokensProposal1_2Tx = club.voteYes(4, {from: bobAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-var burnTokensProposal1_3Tx = club.voteYes(4, {from: carolAccount, gas: 500000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(burnTokensProposal1_1Tx, burnTokensProposal1_Message + " - Alice proposeBurnTokens(Alice, 100000 tokens)");
-passIfTxStatusError(burnTokensProposal1_2Tx, burnTokensProposal1_Message + " - Bob voteYes(4) - Expecting failure as not a member");
-failIfTxStatusError(burnTokensProposal1_3Tx, burnTokensProposal1_Message + " - Carol voteYes(4)");
-printTxData("burnTokensProposal1_1Tx", burnTokensProposal1_1Tx);
-printTxData("burnTokensProposal1_2Tx", burnTokensProposal1_2Tx);
-printTxData("burnTokensProposal1_3Tx", burnTokensProposal1_3Tx);
-printClubContractDetails();
-printTokenContractDetails();
-console.log("RESULT: ");
-
-
-
-exit;
-
-
-
-// -----------------------------------------------------------------------------
-var deployLibDAOMessage = "Deploy DAO Library";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + deployLibDAOMessage + " -----");
-var membersLibContract = web3.eth.contract(membersLibAbi);
-// console.log(JSON.stringify(membersLibContract));
-var membersLibTx = null;
-var membersLibAddress = null;
-var membersLibBTTS = membersLibContract.new({from: contractOwnerAccount, data: membersLibBin, gas: 6000000, gasPrice: defaultGasPrice},
-  function(e, contract) {
-    if (!e) {
-      if (!contract.address) {
-        membersLibTx = contract.transactionHash;
-      } else {
-        membersLibAddress = contract.address;
-        addAccount(membersLibAddress, "DAO Library - Members");
-        console.log("DATA: membersLibAddress=" + membersLibAddress);
-      }
-    }
-  }
-);
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(membersLibTx, deployLibDAOMessage);
-printTxData("membersLibTx", membersLibTx);
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var deployDAOMessage = "Deploy DAO Contract";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + deployDAOMessage + " -----");
-var newDAOBin = daoBin.replace(/__DecentralisedFutureFundDAO\.sol\:Membe__/g, membersLibAddress.substring(2, 42));
-var daoContract = web3.eth.contract(daoAbi);
-var daoTx = null;
-var daoAddress = null;
-var dao = daoContract.new({from: contractOwnerAccount, data: newDAOBin, gas: 6000000, gasPrice: defaultGasPrice},
-  function(e, contract) {
-    if (!e) {
-      if (!contract.address) {
-        daoTx = contract.transactionHash;
-      } else {
-        daoAddress = contract.address;
-        addAccount(daoAddress, "DFF DAO");
-        addDAOContractAddressAndAbi(daoAddress, daoAbi);
-        console.log("DATA: daoAddress=" + daoAddress);
-      }
-    }
-  }
-);
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(daoTx, deployDAOMessage);
-printTxData("daoAddress=" + daoAddress, daoTx);
-printDAOContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var initSetBTTSToken_Message = "Initialisation - Set BTTS Token";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + initSetBTTSToken_Message + " -----");
-var initSetBTTSToken_1Tx = dao.initSetBTTSToken(tokenAddress, {from: contractOwnerAccount, gas: 100000, gasPrice: defaultGasPrice});
-var initSetBTTSToken_2Tx = token.setMinter(daoAddress, {from: contractOwnerAccount, gas: 100000, gasPrice: defaultGasPrice});
-var initSetBTTSToken_3Tx = token.transferOwnershipImmediately(daoAddress, {from: contractOwnerAccount, gas: 100000, gasPrice: defaultGasPrice});
-var initSetBTTSToken_4Tx = eth.sendTransaction({from: contractOwnerAccount, to: daoAddress, value: web3.toWei("100", "ether"), gas: 100000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(initSetBTTSToken_1Tx, initSetBTTSToken_Message + " - dao.initSetBTTSToken(bttsToken)");
-failIfTxStatusError(initSetBTTSToken_2Tx, initSetBTTSToken_Message + " - token.setMinter(dao)");
-failIfTxStatusError(initSetBTTSToken_3Tx, initSetBTTSToken_Message + " - token.transferOwnershipImmediately(dao)");
-failIfTxStatusError(initSetBTTSToken_4Tx, initSetBTTSToken_Message + " - send 100 ETH to dao");
-printTxData("initSetBTTSToken_1Tx", initSetBTTSToken_1Tx);
-printTxData("initSetBTTSToken_2Tx", initSetBTTSToken_2Tx);
-printTxData("initSetBTTSToken_3Tx", initSetBTTSToken_3Tx);
-printTxData("initSetBTTSToken_4Tx", initSetBTTSToken_4Tx);
-printDAOContractDetails();
-printTokenContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var initAddMembers_Message = "Initialisation - Add Members";
-var name1 = "0x" + web3.padLeft(web3.toHex("two").substring(2), 64);
-var name2 = "0x" + web3.padLeft(web3.toHex("three").substring(2), 64);
-var name3 = "0x" + web3.padLeft(web3.toHex("four").substring(2), 64);
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + initAddMembers_Message + " -----");
-var initAddMembers_1Tx = dao.initAddMember(account2, name1, true, {from: contractOwnerAccount, gas: 300000, gasPrice: defaultGasPrice});
-var initAddMembers_2Tx = dao.initAddMember(account3, name2, true, {from: contractOwnerAccount, gas: 300000, gasPrice: defaultGasPrice});
-var initAddMembers_3Tx = dao.initAddMember(account4, name3, false, {from: contractOwnerAccount, gas: 300000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(initAddMembers_1Tx, initAddMembers_Message + " - dao.initAddMember(account2, 'two', true)");
-failIfTxStatusError(initAddMembers_2Tx, initAddMembers_Message + " - dao.initAddMember(account3, 'three', true)");
-failIfTxStatusError(initAddMembers_3Tx, initAddMembers_Message + " - dao.initAddMember(account4, 'four', false)");
-printTxData("initAddMembers_1Tx", initAddMembers_1Tx);
-printTxData("initAddMembers_2Tx", initAddMembers_2Tx);
-printTxData("initAddMembers_3Tx", initAddMembers_3Tx);
-printDAOContractDetails();
-printTokenContractDetails();
-console.log("RESULT: ");
-
-
-if (false) {
-// -----------------------------------------------------------------------------
-var initRemoveMembers_Message = "Initialisation - Remove Members";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + initRemoveMembers_Message + " -----");
-var initRemoveMembers_1Tx = dao.initRemoveMember(account2, {from: contractOwnerAccount, gas: 200000, gasPrice: defaultGasPrice});
-var initRemoveMembers_2Tx = dao.initRemoveMember(account3, {from: contractOwnerAccount, gas: 200000, gasPrice: defaultGasPrice});
-var initRemoveMembers_3Tx = dao.initRemoveMember(account4, {from: contractOwnerAccount, gas: 200000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(initRemoveMembers_1Tx, initRemoveMembers_Message + " - dao.initRemoveMember(account2)");
-failIfTxStatusError(initRemoveMembers_2Tx, initRemoveMembers_Message + " - dao.initRemoveMember(account3)");
-failIfTxStatusError(initRemoveMembers_3Tx, initRemoveMembers_Message + " - dao.initRemoveMember(account4)");
-printTxData("initRemoveMembers_1Tx", initRemoveMembers_1Tx);
-printTxData("initRemoveMembers_2Tx", initRemoveMembers_2Tx);
-printTxData("initRemoveMembers_3Tx", initRemoveMembers_3Tx);
-printDAOContractDetails();
-printTokenContractDetails();
-console.log("RESULT: ");
-}
-
-
-// -----------------------------------------------------------------------------
-var initialisationComplete_Message = "Initialisation - Complete";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + initialisationComplete_Message + " -----");
-var initialisationComplete_1Tx = dao.initialisationComplete({from: contractOwnerAccount, gas: 100000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(initialisationComplete_1Tx, initialisationComplete_Message + " - dao.initialisationComplete()");
-printTxData("initialisationComplete_1Tx", initialisationComplete_1Tx);
-printDAOContractDetails();
-printTokenContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var etherPaymentProposal_Message = "Ether Payment Proposal";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + etherPaymentProposal_Message + " -----");
-var etherPaymentProposal_1Tx = dao.proposeEtherPayment("payment to ac2", account2, new BigNumber("12").shift(18), {from: account2, gas: 300000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(etherPaymentProposal_1Tx, etherPaymentProposal_Message + " - dao.proposeEtherPayment(ac2, 12 ETH)");
-printTxData("etherPaymentProposal_1Tx", etherPaymentProposal_1Tx);
-printDAOContractDetails();
-printTokenContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var vote1_Message = "Vote - Ether Payment Proposal";
-// -----------------------------------------------------------------------------
-console.log("RESULT: ----- " + vote1_Message + " -----");
-var vote1_1Tx = dao.voteYes(0, {from: account3, gas: 300000, gasPrice: defaultGasPrice});
-while (txpool.status.pending > 0) {
-}
-printBalances();
-failIfTxStatusError(vote1_1Tx, vote1_Message + " - ac3 dao.voteYes(proposal 0)");
-printTxData("vote1_1Tx", vote1_1Tx);
-printDAOContractDetails();
-printTokenContractDetails();
-console.log("RESULT: ");
-
 
 
 EOF

@@ -12,9 +12,9 @@ TEST1OUTPUT        = 'test1output.txt'
 TEST1RESULTS       = 'test1results.txt'
 JSONSUMMARY        = 'Summary.json'
 JSONEVENTS         = 'Events.json'
-CURRENTTIME        = '1527522285' 'Tue May 29 01:44:45 2018'
-START_DATE         = '1527522330' 'Tue May 29 01:45:30 2018'
-END_DATE           = '1527522405' 'Tue May 29 01:46:45 2018'
+CURRENTTIME        = '1527544267' 'Tue May 29 07:51:07 2018'
+START_DATE         = '1527544312' 'Tue May 29 07:51:52 2018'
+END_DATE           = '1527544387' 'Tue May 29 07:53:07 2018'
 --- Differences ../contracts/ProxyFactory.sol ProxyFactory.sol ---
 
 --- Differences ../contracts/MintableToken.sol MintableToken.sol ---
@@ -25,7 +25,7 @@ Welcome to the Geth JavaScript console!
 
 instance: Geth/v1.8.6-stable-12683fec/darwin-amd64/go1.10
 coinbase: 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e
-at block: 4030 (Tue, 29 May 2018 01:44:45 AEST)
+at block: 19990 (Tue, 29 May 2018 07:51:07 AEST)
  datadir: /Users/bok/Projects/ProxyFactoryTest/test/testchain
  modules: admin:1.0 clique:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 shh:1.0 txpool:1.0 web3:1.0
 
@@ -58,23 +58,23 @@ undefined
 > 
 undefined
 > 
-RESULT:  # Account                                             EtherBalanceChange                          Token Name
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.000000000000000000           0.000000000000000000 Account #0 - Miner
-RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
-RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - Alice
-RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - Bob
-RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - Carol
-RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5 - Dave
-RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
-RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
-RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
-RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9
-RESULT: 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000 Account #10
-RESULT: 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000 Account #11
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:                                                                                     0.000000000000000000 Total Token Balances
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  # Account                                             EtherBalanceChange                 (Token A) WETH                  (Token B) DAI Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #2 - Alice
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #3 - Bob
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #4 - Carol
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #5 - Dave
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #9
+RESULT: 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #10
+RESULT: 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #11
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
+RESULT:                                                                                     0.000000000000000000           0.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
 RESULT: 
 undefined
 > 
@@ -109,6 +109,7 @@ undefined
 ............ 
 ............ 
 ............ 
+............ 
 ......... 
 ...... 
 ... 
@@ -117,32 +118,35 @@ undefined
 ... 
 undefined
 > 
-DATA: proxyFactoryAddress=0x24ad1371437980d21a8ebf2e46a824b860a6d47c
-RESULT:  # Account                                             EtherBalanceChange                          Token Name
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.004489568000000000           0.000000000000000000 Account #0 - Miner
-RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.004489568000000000           0.000000000000000000 Account #1 - Contract Owner
-RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - Alice
-RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - Bob
-RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - Carol
-RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5 - Dave
-RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
-RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
-RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
-RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9
-RESULT: 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000 Account #10
-RESULT: 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000 Account #11
-RESULT: 12 0x24ad1371437980d21a8ebf2e46a824b860a6d47c        0.000000000000000000           0.000000000000000000 ProxyFactory
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:                                                                                     0.000000000000000000 Total Token Balances
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+DATA: proxyFactoryAddress=0x2bf4dd749b6a58271d15684796ce878b2b8f2f9f
+RESULT:  # Account                                             EtherBalanceChange                 (Token A) WETH                  (Token B) DAI Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.004489568000000000           0.000000000000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.004489568000000000           0.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #2 - Alice
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #3 - Bob
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #4 - Carol
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #5 - Dave
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #9
+RESULT: 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #10
+RESULT: 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #11
+RESULT: 12 0x2bf4dd749b6a58271d15684796ce878b2b8f2f9f        0.000000000000000000           0.000000000000000000           0.000000000000000000 ProxyFactory
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
+RESULT:                                                                                     0.000000000000000000           0.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
 RESULT: 
 undefined
 > 
 RESULT: PASS Deploy ProxyFactory
 1
 > 
-RESULT: proxyFactoryTx status=0x1 Success gas=6000000 gasUsed=280598 costETH=0.004489568 costUSD=3.03364599328 @ ETH/USD=675.71 gasPrice=16 gwei block=4040 txIx=0 txId=0xacf31ecad006a0ac9ab28cb601366e5dfe01285b80e8a01a4ba0548648143df9 @ 1527522295 Mon, 28 May 2018 15:44:55 UTC
+RESULT: proxyFactoryTx status=0x1 Success gas=6000000 gasUsed=280598 costETH=0.004489568 costUSD=3.03364599328 @ ETH/USD=675.71 gasPrice=16 gwei block=20000 txIx=0 txId=0xa09bed171914bbe3130385bf3ce6cbbe4c52cd52e3c39f7056309313bed890aa @ 1527544277 Mon, 28 May 2018 21:51:17 UTC
+undefined
+> 
+RESULT: proxyFactoryContractAddress=0x2bf4dd749b6a58271d15684796ce878b2b8f2f9f
 undefined
 > 
 RESULT: 
@@ -182,11 +186,6 @@ undefined
 ............ 
 ............ 
 ............ 
-............ 
-............ 
-............ 
-............ 
-............ 
 ......... 
 ...... 
 ... 
@@ -195,45 +194,67 @@ undefined
 ... 
 undefined
 > 
-DATA: var tokenAddress="0xfa22627af9c0e35898ccf254ee6989819b2d3eef";
-DATA: var tokenAbi=[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"tokens","type":"uint256"}],"name":"mint","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnershipImmediately","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"tokens","type":"uint256"}],"name":"burn","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"},{"name":"data","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"tokenAddress","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferAnyERC20Token","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"tokenOwner","type":"address"},{"name":"initialSupply","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"tokenOwner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Approval","type":"event"}];
+undefined
+> 
+... 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+DATA: var tokenAddress="0x701ef640d12387f1c9a154037b3354a5a4f6c4f9";
+undefined
+> 
+DATA: var tokenAbi=[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"initialised","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"tokens","type":"uint256"}],"name":"mint","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnershipImmediately","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"tokenOwner","type":"address"},{"name":"initialSupply","type":"uint256"}],"name":"init","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"tokens","type":"uint256"}],"name":"burn","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"},{"name":"data","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"tokenAddress","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferAnyERC20Token","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"tokenOwner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Approval","type":"event"}];
+undefined
+> 
 DATA: var token=eth.contract(tokenAbi).at(tokenAddress);
-RESULT:  # Account                                             EtherBalanceChange                          Token Name
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.022101088000000000           0.000000000000000000 Account #0 - Miner
-RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.022101088000000000     1000000.000000000000000000 Account #1 - Contract Owner
-RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - Alice
-RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - Bob
-RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - Carol
-RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5 - Dave
-RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
-RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
-RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
-RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9
-RESULT: 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000 Account #10
-RESULT: 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000 Account #11
-RESULT: 12 0x24ad1371437980d21a8ebf2e46a824b860a6d47c        0.000000000000000000           0.000000000000000000 ProxyFactory
-RESULT: 13 0xfa22627af9c0e35898ccf254ee6989819b2d3eef        0.000000000000000000           0.000000000000000000 Token 'ORGINAL' 'Original'
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:                                                                               1000000.000000000000000000 Total Token Balances
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                 (Token A) WETH                  (Token B) DAI Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.025092960000000000           0.000000000000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.025092960000000000     1000000.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #2 - Alice
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #3 - Bob
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #4 - Carol
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #5 - Dave
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #9
+RESULT: 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #10
+RESULT: 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #11
+RESULT: 12 0x2bf4dd749b6a58271d15684796ce878b2b8f2f9f        0.000000000000000000           0.000000000000000000           0.000000000000000000 ProxyFactory
+RESULT: 13 0x701ef640d12387f1c9a154037b3354a5a4f6c4f9        0.000000000000000000           0.000000000000000000           0.000000000000000000 Token 'ORIGINAL' 'Original'
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
+RESULT:                                                                               1000000.000000000000000000           0.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
 RESULT: 
 undefined
 > 
-RESULT: PASS Deploy Token Contract
+RESULT: PASS Deploy Token Contract - deploy
 1
 > 
-RESULT: tokenTx status=0x1 Success gas=6000000 gasUsed=1100720 costETH=0.01761152 costUSD=11.9002801792 @ ETH/USD=675.71 gasPrice=16 gwei block=4042 txIx=0 txId=0x312c8b17606d9e77d8e1bc50cee07275b6fcc6bd0dcecdfe2209356fe72f8843 @ 1527522297 Mon, 28 May 2018 15:44:57 UTC
+RESULT: PASS Deploy Token Contract - init
+1
+> 
+RESULT: tokenTx status=0x1 Success gas=6000000 gasUsed=1132359 costETH=0.018117744 costUSD=12.24234079824 @ ETH/USD=675.71 gasPrice=16 gwei block=20002 txIx=0 txId=0xebe4d9e5d27fe82be8dafeb0320570e9fa63324b45548b36cafb9a9131f78956 @ 1527544279 Mon, 28 May 2018 21:51:19 UTC
 undefined
 > 
-RESULT: tokenContractAddress=0xfa22627af9c0e35898ccf254ee6989819b2d3eef
+RESULT: deployToken_1Tx status=0x1 Success gas=6000000 gasUsed=155353 costETH=0.002485648 costUSD=1.67957721008 @ ETH/USD=675.71 gasPrice=16 gwei block=20004 txIx=0 txId=0xdcbf55b3523118b70af393dcb4f612b2cba0e0d33a15f9f25fc20a1df0e2e6a6 @ 1527544281 Mon, 28 May 2018 21:51:21 UTC
+undefined
+> 
+RESULT: tokenAContractAddress=0x701ef640d12387f1c9a154037b3354a5a4f6c4f9
 RESULT: token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 RESULT: token.newOwner=0x0000000000000000000000000000000000000000
-RESULT: token.symbol=ORGINAL
+RESULT: token.symbol=ORIGINAL
 RESULT: token.name=Original
 RESULT: token.decimals=18
 RESULT: token.totalSupply=1000000
-RESULT: Transfer 0 #4042: from=0x0000000000000000000000000000000000000000 to=0xa11aae29840fbb5c86e6fd4cf809eba183aef433 tokens=1000000
+RESULT: token.initialised=true
+RESULT: Transfer 0 #20004: from=0x0000000000000000000000000000000000000000 to=0xa11aae29840fbb5c86e6fd4cf809eba183aef433 tokens=1000000
 undefined
 > 
 RESULT: 
@@ -247,14 +268,14 @@ undefined
 > 
 undefined
 > 
-RESULT: originalData=00000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000012000000000000000000000000a11aae29840fbb5c86e6fd4cf809eba183aef43300000000000000000000000000000000000000000000d3c21bcecceda100000000000000000000000000000000000000000000000000000000000000000000074f5247494e414c0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000084f726967696e616c000000000000000000000000000000000000000000000000
 undefined
 > 
 undefined
 > 
 undefined
 > 
-RESULT: data=00000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000012000000000000000000000000a11aae29840fbb5c86e6fd4cf809eba183aef43300000000000000000000000000000000000000000000d3c21bcecceda100000000000000000000000000000000000000000000000000000000000000000000074f5247494e414c0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000084f726967696e616c000000000000000000000000000000000000000000000000
+undefined
+> 
 undefined
 > 
 undefined
@@ -267,19 +288,11 @@ undefined
 ... 
 undefined
 > 
-(anonymous): Line 2:1 Unexpected end of input
-> 
-RESULT: clubFactoryContractAddress=null
+RESULT: proxyFactoryContractAddress=0x2bf4dd749b6a58271d15684796ce878b2b8f2f9f
+RESULT: get ProxyDeployed 0 #20007 {"proxyAddress":"0x18bfb8b78b98b136848a0949a0a3d803f7580cb6","targetAddress":"0x701ef640d12387f1c9a154037b3354a5a4f6c4f9"}
 undefined
 > 
-undefined
-> 
-undefined
-> 
-RESULT: clubs=#0 []
-undefined
-> 
-RESULT: tokens=#0 []
+RESULT: newContractAddress=0x18bfb8b78b98b136848a0949a0a3d803f7580cb6
 undefined
 > 
 undefined
@@ -288,78 +301,132 @@ undefined
 > 
 undefined
 > 
-ReferenceError: 'clubAbi' is not defined
-    at <anonymous>:1:30
-
-> 
-DATA: clubAddress=undefined
 undefined
 > 
 undefined
 > 
-DATA: tokenAddress=undefined
 undefined
 > 
-Error: new BigNumber() not a base 16 number: 
-    at L (bignumber.js:3:2876)
-    at bignumber.js:3:8435
-    at a (bignumber.js:3:389)
-    at web3.js:1110:23
-    at web3.js:1634:20
-    at web3.js:826:16
-    at map (<native code>)
-    at web3.js:825:12
-    at web3.js:4080:18
-
-> 
-TypeError: Cannot access member 'name' of undefined
-    at <anonymous>:1:36
-
-> 
-ReferenceError: 'clubAbi' is not defined
-    at <anonymous>:1:43
-
+... 
+undefined
 > 
 undefined
 > 
-(anonymous): Line 1:1 Unexpected token *
+undefined
 > 
-RESULT:  # Account                                             EtherBalanceChange                          Token Name
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.023822352000000000           0.000000000000000000 Account #0 - Miner
-RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.022101088000000000           0.000000000000000000 Account #1 - Contract Owner
-RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976       -0.001721264000000000           0.000000000000000000 Account #2 - Alice
-RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - Bob
-RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - Carol
-RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5 - Dave
-RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
-RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
-RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
-RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9
-RESULT: 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000 Account #10
-RESULT: 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000 Account #11
-RESULT: 12 0x24ad1371437980d21a8ebf2e46a824b860a6d47c        0.000000000000000000           0.000000000000000000 ProxyFactory
-RESULT: 13 0xfa22627af9c0e35898ccf254ee6989819b2d3eef        0.000000000000000000           0.000000000000000000 Token 'ORGINAL' 'Original'
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:                                                                                     0.000000000000000000 Total Token Balances
-RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  # Account                                             EtherBalanceChange                 (Token A) WETH                  (Token B) DAI Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.028918624000000000           0.000000000000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.025092960000000000     1000000.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976       -0.003825664000000000           0.000000000000000000     2000000.000000000000000000 Account #2 - Alice
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #3 - Bob
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #4 - Carol
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #5 - Dave
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #9
+RESULT: 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #10
+RESULT: 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000           0.000000000000000000 Account #11
+RESULT: 12 0x2bf4dd749b6a58271d15684796ce878b2b8f2f9f        0.000000000000000000           0.000000000000000000           0.000000000000000000 ProxyFactory
+RESULT: 13 0x701ef640d12387f1c9a154037b3354a5a4f6c4f9        0.000000000000000000           0.000000000000000000           0.000000000000000000 Token 'ORIGINAL' 'Original'
+RESULT: 14 0x18bfb8b78b98b136848a0949a0a3d803f7580cb6        0.000000000000000000           0.000000000000000000           0.000000000000000000 New Token 'NEWTOKEN' 'New Token'
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
+RESULT:                                                                               1000000.000000000000000000     2000000.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ------------------------------ ---------------------------
 RESULT: 
 undefined
 > 
-RESULT: FAIL Deploy Proxy Contract
-0
+RESULT: PASS Deploy Proxy Contract - Deploy New Token Contract
+1
 > 
-RESULT: deployProxyContractTx status=0x0 Failure gas=4000000 gasUsed=107579 costETH=0.001721264 costUSD=1.16307529744 @ ETH/USD=675.71 gasPrice=16 gwei block=4045 txIx=0 txId=0x73bc74c454cf503bde4b7d7bf2740415d06d5c91b7a3fccecba55dcf6827b1eb @ 1527522300 Mon, 28 May 2018 15:45:00 UTC
+RESULT: PASS Deploy Proxy Contract - New Token Contract Init
+1
+> 
+RESULT: deployProxyContractTx status=0x1 Success gas=4000000 gasUsed=67790 costETH=0.00108464 costUSD=0.7329020944 @ ETH/USD=675.71 gasPrice=16 gwei block=20007 txIx=0 txId=0x2256f8b68a28ac41b688e739ad52aafaddc3dc3d1828df7fedf04cbcd220fe17 @ 1527544284 Mon, 28 May 2018 21:51:24 UTC
 undefined
 > 
+RESULT: deployNewToken_1Tx status=0x1 Success gas=6000000 gasUsed=171314 costETH=0.002741024 costUSD=1.85213732704 @ ETH/USD=675.71 gasPrice=16 gwei block=20009 txIx=0 txId=0xc2abe697e930e0ca0b2ac796b3b24dce3e5a395b85962bc46f1c08f1c57c7382 @ 1527544286 Mon, 28 May 2018 21:51:26 UTC
 undefined
 > 
-RESULT: tokenContractAddress=undefined
+RESULT: proxyFactoryContractAddress=0x2bf4dd749b6a58271d15684796ce878b2b8f2f9f
+RESULT: ProxyDeployed 0 #20007 {"proxyAddress":"0x18bfb8b78b98b136848a0949a0a3d803f7580cb6","targetAddress":"0x701ef640d12387f1c9a154037b3354a5a4f6c4f9"}
 undefined
 > 
+RESULT: tokenAContractAddress=0x701ef640d12387f1c9a154037b3354a5a4f6c4f9
+RESULT: token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+RESULT: token.newOwner=0x0000000000000000000000000000000000000000
+RESULT: token.symbol=ORIGINAL
+RESULT: token.name=Original
+RESULT: token.decimals=18
+RESULT: token.totalSupply=1000000
+RESULT: token.initialised=true
+undefined
+> 
+RESULT: tokenBContractAddress=0x18bfb8b78b98b136848a0949a0a3d803f7580cb6
+RESULT: token.owner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.newOwner=0x0000000000000000000000000000000000000000
+RESULT: token.symbol=NEWTOKEN
+RESULT: token.name=New Token
+RESULT: token.decimals=18
+RESULT: token.totalSupply=2000000
+RESULT: token.initialised=true
+RESULT: Transfer 0 #20009: from=0x0000000000000000000000000000000000000000 to=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 tokens=2000000
 undefined
 > 
 RESULT: 
 undefined
+> 
+> 
+> 
+RESULT: oldAddr=0x701ef640d12387f1c9a154037b3354a5a4f6c4f9
+undefined
+> 
+RESULT: newAddr=0x18bfb8b78b98b136848a0949a0a3d803f7580cb6
+undefined
+> 
+RESULT: oldCode=0x6080604052600436106101115763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166306fdde03811461014357806307003bb4146101cd578063095ea7b3146101f657806318160ddd1461021a57806323b872dd14610241578063313ce5671461026b57806340c10f191461029657806370a08231146102ba57806379ba5097146102db5780637e71fb09146102f25780638da5cb5b146103135780638df28e551461034457806395d89b41146103f25780639dc29fac14610407578063a9059cbb1461042b578063cae9ca511461044f578063d4ee1d90146104b8578063dc39d06d146104cd578063dd62ed3e146104f1578063f2fde38b14610518575b600160a060020a03600054163660008037600080368184600019f43d806000803e81801561013e57816000f35b816000fd5b34801561014f57600080fd5b50610158610539565b6040805160208082528351818301528351919283929083019185019080838360005b8381101561019257818101518382015260200161017a565b50505050905090810190601f1680156101bf5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156101d957600080fd5b506101e26105d0565b604080519115158252519081900360200190f35b34801561020257600080fd5b506101e2600160a060020a03600435166024356105d9565b34801561022657600080fd5b5061022f610640565b60408051918252519081900360200190f35b34801561024d57600080fd5b506101e2600160a060020a0360043581169060243516604435610672565b34801561027757600080fd5b5061028061076b565b6040805160ff9092168252519081900360200190f35b3480156102a257600080fd5b506101e2600160a060020a0360043516602435610774565b3480156102c657600080fd5b5061022f600160a060020a036004351661081c565b3480156102e757600080fd5b506102f0610837565b005b3480156102fe57600080fd5b506102f0600160a060020a03600435166108bf565b34801561031f57600080fd5b5061032861093e565b60408051600160a060020a039092168252519081900360200190f35b34801561035057600080fd5b506040805160206004803580820135601f81018490048402850184019095528484526102f094369492936024939284019190819084018382808284375050604080516020601f89358b018035918201839004830284018301909452808352979a9998810197919650918201945092508291508401838280828437509497505050833560ff1694505050506020810135600160a060020a0316906040013561094d565b3480156103fe57600080fd5b50610158610a0a565b34801561041357600080fd5b506101e2600160a060020a0360043516602435610a68565b34801561043757600080fd5b506101e2600160a060020a0360043516602435610b4c565b34801561045b57600080fd5b50604080516020600460443581810135601f81018490048402850184019095528484526101e2948235600160a060020a0316946024803595369594606494920191908190840183828082843750949750610bea9650505050505050565b3480156104c457600080fd5b50610328610d4b565b3480156104d957600080fd5b506101e2600160a060020a0360043516602435610d5a565b3480156104fd57600080fd5b5061022f600160a060020a0360043581169060243516610e15565b34801561052457600080fd5b506102f0600160a060020a0360043516610e40565b60038054604080516020601f60026000196101006001881615020190951694909404938401819004810282018101909252828152606093909290918301828280156105c55780601f1061059a576101008083540402835291602001916105c5565b820191906000526020600020905b8154815290600101906020018083116105a857829003601f168201915b505050505090505b90565b60065460ff1681565b336000818152600860209081526040808320600160a060020a038716808552908352818420869055815186815291519394909390927f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925928290030190a35060015b92915050565b6000805260076020527f6d5257204ebe7d88fd91ae87941cb2dd9d8062b64ae5a2bd2d28ec40b9fbf6df546005540390565b600160a060020a03831660009081526007602052604081205461069b908363ffffffff610e8616565b600160a060020a03851660009081526007602090815260408083209390935560088152828220338352905220546106d8908363ffffffff610e8616565b600160a060020a03808616600090815260086020908152604080832033845282528083209490945591861681526007909152205461071c908363ffffffff610e9b16565b600160a060020a038085166000818152600760209081526040918290209490945580518681529051919392881692600080516020610f4483398151915292918290030190a35060019392505050565b60045460ff1690565b60008054600160a060020a0316331461078c57600080fd5b600160a060020a0383166000908152600760205260409020546107b5908363ffffffff610e9b16565b600160a060020a0384166000908152600760205260409020556005546107e1908363ffffffff610e9b16565b600555604080518381529051600160a060020a03851691600091600080516020610f448339815191529181900360200190a350600192915050565b600160a060020a031660009081526007602052604090205490565b600154600160a060020a0316331461084e57600080fd5b60015460008054604051600160a060020a0393841693909116917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600180546000805473ffffffffffffffffffffffffffffffffffffffff19908116600160a060020a03841617909155169055565b600054600160a060020a031633146108d657600080fd5b60008054604051600160a060020a03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b600054600160a060020a031681565b60065460ff161561095d57600080fd5b6006805460ff191660011790556000805473ffffffffffffffffffffffffffffffffffffffff191633179055845161099c906002906020880190610eab565b5083516109b0906003906020870190610eab565b506004805460ff191660ff8516179055600160a060020a0382166000818152600760209081526040808320859055600585905580518581529051600080516020610f44833981519152929181900390910190a35050505050565b60028054604080516020601f60001961010060018716150201909416859004938401819004810282018101909252828152606093909290918301828280156105c55780601f1061059a576101008083540402835291602001916105c5565b60008054600160a060020a03163314610a8057600080fd5b600160a060020a038316600090815260076020526040902054821015610abc57600160a060020a03831660009081526007602052604090205491505b600160a060020a038316600090815260076020526040902054610ae5908363ffffffff610e8616565b600160a060020a038416600090815260076020526040902055600554610b11908363ffffffff610e8616565b600555604080518381529051600091600160a060020a03861691600080516020610f448339815191529181900360200190a350600192915050565b33600090815260076020526040812054610b6c908363ffffffff610e8616565b3360009081526007602052604080822092909255600160a060020a03851681522054610b9e908363ffffffff610e9b16565b600160a060020a038416600081815260076020908152604091829020939093558051858152905191923392600080516020610f448339815191529281900390910190a350600192915050565b336000818152600860209081526040808320600160a060020a038816808552908352818420879055815187815291519394909390927f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925928290030190a36040517f8f4ffcb10000000000000000000000000000000000000000000000000000000081523360048201818152602483018690523060448401819052608060648501908152865160848601528651600160a060020a038a1695638f4ffcb195948a94938a939192909160a490910190602085019080838360005b83811015610cda578181015183820152602001610cc2565b50505050905090810190601f168015610d075780820380516001836020036101000a031916815260200191505b5095505050505050600060405180830381600087803b158015610d2957600080fd5b505af1158015610d3d573d6000803e3d6000fd5b506001979650505050505050565b600154600160a060020a031681565b60008054600160a060020a03163314610d7257600080fd5b60008054604080517fa9059cbb000000000000000000000000000000000000000000000000000000008152600160a060020a0392831660048201526024810186905290519186169263a9059cbb926044808401936020939083900390910190829087803b158015610de257600080fd5b505af1158015610df6573d6000803e3d6000fd5b505050506040513d6020811015610e0c57600080fd5b50519392505050565b600160a060020a03918216600090815260086020908152604080832093909416825291909152205490565b600054600160a060020a03163314610e5757600080fd5b6001805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b600082821115610e9557600080fd5b50900390565b8181018281101561063a57600080fd5b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f10610eec57805160ff1916838001178555610f19565b82800160010185558215610f19579182015b82811115610f19578251825591602001919060010190610efe565b50610f25929150610f29565b5090565b6105cd91905b80821115610f255760008155600101610f2f5600ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3efa165627a7a72305820a655c63d20006446e0a30d432906a63a511cef5bcf8498ee2d7be9202761d87a0029
+undefined
+> 
+RESULT: newCode=0x600080808080368092803773701ef640d12387f1c9a154037b3354a5a4f6c4f95af43d828181803e808314602f57f35bfd
+undefined
+> 
+> 
+... 
+... 
+... 
+... 
+... 
+...... 
+...... 
+...... 
+...... 
+...... 
+...... 
+... 
+... 
+... 
+RESULT: old data[0]=0x000000000000000000000000a11aae29840fbb5c86e6fd4cf809eba183aef433 9.19742505142668909682433599802972291975925920819e+47 
+RESULT: new data[0]=0x000000000000000000000000a22ab8a9d641ce77e06d98b7d7065d324d3d6976 9.25809222624928220689460700822646927152773949814e+47 
+RESULT: old data[1]=0x0000000000000000000000000000000000000000000000000000000000000000 0 
+RESULT: new data[1]=0x0000000000000000000000000000000000000000000000000000000000000000 0 
+RESULT: old data[2]=0x4f524947494e414c000000000000000000000000000000000000000000000010 3.5878102246749390834075394079147406982668503002626857882810058135773519020048e+76 ORIGINAL
+RESULT: new data[2]=0x4e4557544f4b454e000000000000000000000000000000000000000000000010 3.540291736188281325216856119109118554625749569927618070303531610003963537e+76 NEWTOKEN
+RESULT: old data[3]=0x4f726967696e616c000000000000000000000000000000000000000000000010 3.5934863074806898772220802383436474449487771577295719628651849601570146615312e+76 Original
+RESULT: new data[3]=0x4e657720546f6b656e0000000000000000000000000000000000000000000012 3.5459675922463024366998045995934844693112383372210887666985571280753795268626e+76 New Token
+RESULT: old data[4]=0x0000000000000000000000000000000000000000000000000000000000000012 18 
+RESULT: new data[4]=0x0000000000000000000000000000000000000000000000000000000000000012 18 
+RESULT: old data[5]=0x00000000000000000000000000000000000000000000d3c21bcecceda1000000 1e+24 
+RESULT: new data[5]=0x00000000000000000000000000000000000000000001a784379d99db42000000 2e+24 
+RESULT: old data[6]=0x0000000000000000000000000000000000000000000000000000000000000001 1 
+RESULT: new data[6]=0x0000000000000000000000000000000000000000000000000000000000000001 1 
+RESULT: old data[7]=0x0000000000000000000000000000000000000000000000000000000000000000 0 
+RESULT: new data[7]=0x0000000000000000000000000000000000000000000000000000000000000000 0 
+RESULT: old data[8]=0x0000000000000000000000000000000000000000000000000000000000000000 0 
+RESULT: new data[8]=0x0000000000000000000000000000000000000000000000000000000000000000 0 
+RESULT: old data[9]=0x0000000000000000000000000000000000000000000000000000000000000000 0 
+RESULT: new data[9]=0x0000000000000000000000000000000000000000000000000000000000000000 0 
+undefined
+> 
 > 
 > 

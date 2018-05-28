@@ -123,11 +123,17 @@ contract MintableToken is MintableTokenInterface, Owned {
     string  _name;
     uint8 _decimals;
     uint _totalSupply;
+    bool public initialised;
 
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
 
-    constructor(string symbol, string name, uint8 decimals, address tokenOwner, uint initialSupply) public {
+    constructor() public {
+    }
+    function init(string symbol, string name, uint8 decimals, address tokenOwner, uint initialSupply) public {
+        require(!initialised);
+        initialised = true;
+        owner = msg.sender;
         _symbol = symbol;
         _name = name;
         _decimals = decimals;
@@ -192,10 +198,32 @@ contract MintableToken is MintableTokenInterface, Owned {
         emit Transfer(tokenOwner, address(0), tokens);
         return true;
     }
-    function () public payable {
-        revert();
-    }
     function transferAnyERC20Token(address tokenAddress, uint tokens) public onlyOwner returns (bool success) {
         return ERC20Interface(tokenAddress).transfer(owner, tokens);
+    }
+
+    // ------------------------------------------------------------------------
+    // https://www.reddit.com/r/ethereum/comments/6c1jui/delegatecall_forwarders_how_to_save_5098_on/
+    // - Creating the forwarding contract only costs <50000 gas, regardless of the length of the underlying call
+    // - Constructor functions are currently not supported, though the mechanism could be expanded with more effort to support constructors.
+    // - The output length is limited to 4096 bytes
+    // - Each call to the contract thereafter will cost an additional ~1100 gas (700 DELEGATECALL + 400 memory expansion)
+    // https://www.reddit.com/r/CryptoDerivatives/comments/6htqva/experiments_in_gas_cost_reduction/
+    // https://gist.github.com/GNSPS/ba7b88565c947cfd781d44cf469c2ddb
+    // https://github.com/gnosis/safe-contracts/blob/master/contracts/Proxy.sol
+    // https://blog.zeppelinos.org/proxy-patterns/
+    // http://solidity.readthedocs.io/en/v0.4.21/assembly.html
+    // ------------------------------------------------------------------------
+    function () public payable {
+        assembly {
+            let masterCopy := and(sload(0), 0xffffffffffffffffffffffffffffffffffffffff)
+            calldatacopy(0, 0, calldatasize())
+            let result := delegatecall(not(0), masterCopy, 0, calldatasize(), 0, 0)
+            let size := returndatasize
+            returndatacopy(0, 0, size)
+            switch result
+            case 0 { revert(0, size) }
+            default { return(0, size) }
+        }
     }
 }
