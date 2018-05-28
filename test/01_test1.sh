@@ -222,6 +222,13 @@ for (var i = 0; i < 10; i++) {
   console.log("RESULT: new data[" + i + "]=" + newer + " " + new BigNumber(newer.substring(2), 16) + " " + newerText);
 }
 
+var oldBalanceKey = web3.sha3("000000000000000000000000" + contractOwnerAccount.substring(2) + "0000000000000000000000000000000000000000000000000000000000000007", {"encoding":"hex"});
+var older = eth.getStorageAt(tokenAddress, oldBalanceKey);
+console.log("RESULT: mapping(olderKey,7)=" + older + " " + new BigNumber(older.substring(2), 16));
+
+var newBalanceKey = web3.sha3("000000000000000000000000" + aliceAccount.substring(2) + "0000000000000000000000000000000000000000000000000000000000000007", {"encoding":"hex"});
+var newer = eth.getStorageAt(newContractAddress, newBalanceKey);
+console.log("RESULT: mapping(newerKey,7)=" + newer + " " + new BigNumber(newer.substring(2), 16));
 
 EOF
 grep "DATA: " $TEST1OUTPUT | sed "s/DATA: //" > $DEPLOYMENTDATA
