@@ -2,6 +2,10 @@
 
 Testing the ProxyFactory contract for cheaper deployment of copies of contracts.
 
+Status: Testing completed. Get your code audited before using the code from this repo in production.
+
+**WARNING: Use with utmost care!**
+
 Information from:
 
 * https://www.reddit.com/r/ethereum/comments/6c1jui/delegatecall_forwarders_how_to_save_5098_on/
@@ -14,6 +18,8 @@ Information from:
 * https://github.com/gnosis/safe-contracts/blob/master/contracts/Proxy.sol
 * https://blog.zeppelinos.org/proxy-patterns/
 * http://solidity.readthedocs.io/en/v0.4.21/assembly.html
+
+**NOTE** - See [Malicious backdoors in Ethereum Proxies](https://medium.com/nomic-labs-blog/malicious-backdoors-in-ethereum-proxies-62629adf3357).
 
 <br />
 
